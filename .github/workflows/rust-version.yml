@@ -16,6 +16,7 @@ jobs:
         with:
           repository: argumentcomputer/ci-workflows
           path: ci-workflows
+          ref: rust-version-action
       - uses: ./ci-workflows/.github/actions/rust-version
         id: rust-version
         with:
