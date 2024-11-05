@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@nightly
+      - uses: dtolnay/rust-toolchain@stable
       - uses: actions/checkout@v4
         with:
           repository: argumentcomputer/ci-workflows
@@ -19,7 +19,7 @@ jobs:
           ref: rust-version-action
       - uses: ./ci-workflows/.github/actions/rust-version
         id: rust-version
-        with:
+          #        with:
           #toolchain: nightly
             #      - uses: tibdex/github-app-token@v2
             #        if: steps.rust-version.outputs.outdated == 'true'
@@ -34,11 +34,11 @@ jobs:
         with:
           #token: ${{ steps.generate-token.outputs.token }}
           branch: "ci-update-rust-version"
-          title: "chore: Update Rust version to `nightly-${{ steps.rust-version.outputs.new-version }}`"
-          commit-message: "chore: Update Rust version to `nightly-${{ steps.rust-version.outputs.new-version }}`"
+          title: "chore: Update Rust version to `${{ steps.rust-version.outputs.new-version }}`"
+          commit-message: "chore: Update Rust version to `${{ steps.rust-version.outputs.new-version }}`"
           labels: "automated-issue"
-          reviewers: "arthurpaulino, wwared, huitseeker, samuelburnham"
+            #reviewers: "arthurpaulino, wwared, huitseeker, samuelburnham"
           body: |
-            This is an automated PR updating the Rust version from `nightly-${{ steps.rust-version.outputs.old-version }}` to `nightly-${{ steps.rust-version.outputs.new-version }}`
+            This is an automated PR updating the Rust version from `${{ steps.rust-version.outputs.old-version }}` to `${{ steps.rust-version.outputs.new-version }}`
 
             Workflow run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
